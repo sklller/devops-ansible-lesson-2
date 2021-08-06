@@ -1,0 +1,25 @@
+---
+- hosts: all
+  
+  vars:
+    users:
+      - test1
+      - test2
+      - test3
+    
+  vars_files:
+    - vars_in_vault.yml
+
+  tasks:
+  
+  - name: Add several users with standard password
+    user:
+      name: "{{ item }}"
+      createhome: yes
+      state: present
+      comment:  "{{ item }}@example.com"
+      password: "{{ std_password|
+                      password_hash('sha512', 65534|
+                                              random(seed=inventory_hostname)|
+                                              string) }}"
+    loop: "{{ users }}"
