@@ -3,9 +3,9 @@
   
   vars:
     users:
-      - test1
-      - test2
-      - test3
+      - alice
+      - bob
+      - carol
     
   vars_files:
     - vars_in_vault.yml
